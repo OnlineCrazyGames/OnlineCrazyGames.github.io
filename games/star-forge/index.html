@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Star Forge</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <section class="panel stats">
+    <div class="box"><span class="lbl">Stardust</span><b id="sd" class="grad">0</b></div>
+    <div class="box"><span class="lbl">Per sec</span><b id="cps">0</b></div>
+    <div class="box"><span class="lbl">Light ✨</span><b id="light">0</b></div>
+    <div class="box best"><span class="lbl">Best run</span><b id="best">0</b></div>
+    <div class="btns"><button class="icon" id="pauseBtn" aria-label="Pause">⏸</button><button class="icon" id="muteBtn" aria-label="Mute sound">🔊</button></div>
+  </section>
+  <main class="stage"><div class="wrap" id="wrap"><canvas id="cv" aria-label="Star, tap to forge stardust"></canvas></div></main>
+  <section class="panel shop" id="shop"></section>
+  <div id="ov" class="ov">
+    <div class="card">
+      <h1 id="ovT" class="grad">Star Forge</h1>
+      <p id="ovS">Tap the star, build machines, ascend for Light. Your progress saves automatically.</p>
+      <div class="sc"><span>Total <b id="ovSc">0</b></span><span>Best run <b id="ovB">0</b></span></div>
+      <button class="play" id="playBtn">Play</button>
+      <p class="hint"><kbd>Space</kbd> tap · <kbd>1</kbd>-<kbd>8</kbd> buy · <kbd>P</kbd> pause · <kbd>M</kbd> mute</p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
