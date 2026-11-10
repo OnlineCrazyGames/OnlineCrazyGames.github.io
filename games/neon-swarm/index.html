@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Neon Swarm</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <section class="panel stats">
+    <div class="box"><span class="lbl">Score</span><b id="score" class="grad">0</b></div>
+    <div class="box"><span class="lbl">Best</span><b id="best">0</b></div>
+    <div class="box"><span class="lbl">Wave</span><b id="level">1</b></div>
+  </section>
+  <section class="panel side">
+    <div class="box"><span class="lbl">Lives · Bombs</span><b id="lives">❤❤❤</b></div>
+    <button class="icon" id="pauseBtn" aria-label="Pause">⏸</button>
+    <button class="icon" id="muteBtn" aria-label="Mute sound">🔊</button>
+  </section>
+  <main class="stage">
+    <div class="wrap" id="wrap"><canvas id="cv" aria-label="Game board"></canvas></div>
+    <div class="touch"><button id="bd" class="drop" aria-label="Use bomb">💣 BOMB</button></div>
+  </main>
+  <div id="ov" class="ov">
+    <div class="card">
+      <h1 id="ovT" class="grad">Neon Swarm</h1>
+      <p id="ovS">Blast the swarm. Grab power-ups. Beat the bosses!</p>
+      <div class="sc"><span>Score <b id="ovSc">0</b></span><span>Best <b id="ovB">0</b></span></div>
+      <button class="play" id="playBtn">Play</button>
+      <p class="hint"><kbd>←↑↓→</kbd> or mouse move (auto-fire) · <kbd>Space</kbd> bomb · <kbd>P</kbd> pause · <kbd>M</kbd> mute</p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
