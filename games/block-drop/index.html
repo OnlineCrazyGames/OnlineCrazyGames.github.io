@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0a0620">
+<title>Block Drop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="game">
+  <aside class="side left">
+    <div class="box hold"><h2>Hold</h2><canvas id="hold" width="100" height="80"></canvas></div>
+    <div class="box stats">
+      <div><span>Score</span><b id="score">0</b></div>
+      <div><span>Lines</span><b id="lines">0</b></div>
+      <div><span>Level</span><b id="level">1</b></div>
+      <div><span>Best</span><b id="best">0</b></div>
+    </div>
+  </aside>
+
+  <main class="stage">
+    <canvas id="board" aria-label="Game board"></canvas>
+    <div id="toast" aria-live="polite"></div>
+    <div id="ov" class="ov">
+      <div class="card">
+        <div class="logo">🧱</div>
+        <h1 id="ovt">Block Drop</h1>
+        <p id="ovm">Stack the blocks, clear lines and chase the high score.</p>
+        <button id="play" class="cta" type="button">▶ Play</button>
+        <p class="keys"><kbd>←</kbd><kbd>→</kbd> move · <kbd>↑</kbd> rotate · <kbd>↓</kbd> soft drop<br><kbd>Space</kbd> hard drop · <kbd>C</kbd> hold · <kbd>P</kbd> pause</p>
+      </div>
+    </div>
+  </main>
+
+  <aside class="side right">
+    <div class="box next"><h2>Next</h2><canvas id="next" width="100" height="240"></canvas></div>
+    <div class="box row">
+      <button id="pbtn" type="button" aria-label="Pause">⏸</button>
+      <button id="mute" type="button" aria-label="Toggle sound">🔊</button>
+    </div>
+  </aside>
+
+  <div class="pad">
+    <button data-a="l" aria-label="Move left">◀</button>
+    <button data-a="d" aria-label="Soft drop">▼</button>
+    <button data-a="r" aria-label="Move right">▶</button>
+    <button data-a="cw" aria-label="Rotate">⟳</button>
+    <button data-a="hold" class="sm">Hold</button>
+    <button data-a="ccw" class="sm" aria-label="Rotate back">⟲</button>
+    <button data-a="hard" class="wide">⤓ Drop</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
