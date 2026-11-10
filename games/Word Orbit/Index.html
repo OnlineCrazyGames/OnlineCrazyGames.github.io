@@ -10,7 +10,7 @@
 <div class="bg"></div>
 <div class="app">
 <header class="topbar">
-<div class="brand"><h1>Word Orbit</h1><p>Connect letters • Make words • Orbit!</p></div>
+<div class="brand"><h1>Word Orbit</h1><p>Drag letters • Make words • No overlap!</p></div>
 <div class="stats">
 <div class="stat"><span>Score</span><b id="score">0</b></div>
 <div class="stat"><span>Best</span><b id="best">0</b></div>
@@ -19,11 +19,17 @@
 </div>
 </header>
 <main class="stage">
-<div class="side"><div class="card"><h3>Next Letters</h3><div id="nextLetters" class="letters"></div></div><div class="card"><h3>Current Word</h3><div id="currentWord" class="current">-</div><p id="points" class="muted">0 pts</p></div></div>
+<div class="side">
+<div class="card"><h3>Next Letters</h3><div id="nextLetters" class="letters"></div></div>
+<div class="card"><h3>Current Word</h3><div id="currentWord" class="current">-</div><p id="points" class="muted">Drag to connect</p></div>
+</div>
 <div class="play-wrap"><canvas id="game"></canvas><button id="clearBtn" class="clear">Clear</button><button id="muteBtn" class="icon">🔊</button></div>
-<div class="side"><div class="card"><h3>Found Words</h3><div id="found" class="found"></div></div><div class="card"><button id="shuffleBtn" class="ghost">Shuffle (S)</button><button id="pauseBtn" class="ghost">Pause (P)</button></div></div>
+<div class="side">
+<div class="card"><h3>Found Words</h3><div id="found" class="found"></div></div>
+<div class="card"><button id="shuffleBtn" class="ghost">Shuffle (S)</button><button id="pauseBtn" class="ghost">Pause (P)</button><p class="muted" style="margin-top:8px;font-size:11px">Tip: 3+ letters, dictionary word = 50 bonus!</p></div>
+</div>
 </main>
-<div class="overlay" id="startOverlay"><div class="modal"><h2>🪐 Word Orbit</h2><p>Orbiting letters se words banao! 3+ letters valid. Drag karo ya click karo.</p><p><kbd>Mouse Drag</kbd> ya <kbd>Touch</kbd> se connect karo</p><p>Best: <b id="bestStart">0</b></p><button id="playBtn" class="primary large">Play Now</button></div></div>
+<div class="overlay" id="startOverlay"><div class="modal"><h2>🪐 Word Orbit V2</h2><p>Ab letters overlap nahi karenge! Slow orbit, easy drag.</p><p><b>Kaise khelna hai:</b> Letter par touch rakho, drag karke dusre letter par jao, word banao!</p><p>Best: <b id="bestStart">0</b></p><button id="playBtn" class="primary large">Play Now</button></div></div>
 <div class="overlay hidden" id="overOverlay"><div class="modal"><h2>Time's Up!</h2><p>Score: <b id="finalScore">0</b> • Words: <b id="finalWords">0</b></p><p id="bestMsg"></p><button id="againBtn" class="primary large">Play Again</button></div></div>
 <div class="overlay hidden" id="pauseOverlay"><div class="modal"><h2>Paused</h2><button id="resumeBtn" class="primary large">Resume</button></div></div>
 </div>
