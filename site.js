@@ -12,13 +12,17 @@ function fromPaths(paths){
  const m={};
  paths.forEach(p=>{const a=p.split('/');if(['games','game'].includes(a[0].toLowerCase())&&a.length>2)(m[a[0]+'/'+a[1]]??=[]).push(a.slice(2).join('/'))});
  return Object.keys(m).sort().map(k=>{const f=m[k],n=k.split('/')[1],h=hsh(n);
-  const html=f.find(x=>x.toLowerCase()==='index.html')||f.find(x=>/^[^/]+\.html?$/i.test(x));if(!html)return null;
-  const img=f.find(x=>/^(thumbnail|thumb|cover|icon|logo|preview)\.(png|jpe?g|webp|gif|svg)$/i.test(x));
-  return{id:n,title:pretty(n),blurb:'Play now in your browser.',cat:'Games',emoji:EM[h%EM.length],color:COL[h%COL.length],url:enc(k+'/'+html),thumb:img&&enc(k+'/'+img),meta:f.includes('game.json')&&enc(k+'/game.json')}}).filter(Boolean);
+  const htmls=f.filter(x=>/\.html?$/i.test(x)).sort((a,b)=>a.split('/').length-b.split('/').length||a.localeCompare(b));
+  const html=htmls.find(x=>x.toLowerCase()==='index.html')||htmls.find(x=>x.split('/').length===1)||htmls.find(x=>/(^|\/)index\.html?$/i.test(x))||htmls[0];
+  if(!html)return null;
+  const base=html.includes('/')?html.slice(0,html.lastIndexOf('/')+1):'';
+  const img=f.find(x=>x.startsWith(base)&&/^(thumbnail|thumb|cover|icon|logo|preview)\.(png|jpe?g|webp|gif|svg)$/i.test(x.slice(base.length)));
+  const meta=f.includes(base+'game.json')?base+'game.json':(f.includes('game.json')?'game.json':null);
+  return{id:n,title:pretty(n),blurb:'Play now in your browser.',cat:'Games',emoji:EM[h%EM.length],color:COL[h%COL.length],url:enc(k+'/'+html),thumb:img&&enc(k+'/'+img),meta:meta&&enc(k+'/'+meta)}}).filter(Boolean);
 }
 async function loadGames(){
- const ck='ocg-games-v2';let stale=null;
- try{const c=JSON.parse(localStorage.getItem(ck));if(c){stale=c.d;if(Date.now()-c.t<6e5)return c.d}}catch(e){}
+ const ck='ocg-games-v3';let stale=null;
+ try{const c=JSON.parse(localStorage.getItem(ck));if(c){stale=c.d;if(Date.now()-c.t<12e4)return c.d}}catch(e){}
  let list=null;
  for(const br of ['main','master']){try{const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${br}?recursive=1`);if(r.ok){list=fromPaths((await r.json()).tree.map(x=>x.path));break}}catch(e){}}
  if(!list){ // fallback: optional games.json containing an array of folder names
