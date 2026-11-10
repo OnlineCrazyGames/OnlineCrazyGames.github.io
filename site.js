@@ -1,6 +1,6 @@
 /* Games are discovered automatically from the games/ folder of this repo. */
 const OWNER='OnlineCrazyGames',REPO='OnlineCrazyGames.github.io';
-const EMAIL='hello@example.com'; // <-- put your real contact email here
+const EMAIL='mgraphics059@gmail.com'; // <-- put your real contact email here
 
 const $=s=>document.querySelector(s);
 const COL=['#ffb3d1','#a8f0c6','#ffe7a0','#c9bbff','#9fe9f2','#ffd59a','#ffc9e3','#b6f0a8'],EM=['🎮','🕹️','👾','🚀','🎲','🧩','🏁','⭐'];

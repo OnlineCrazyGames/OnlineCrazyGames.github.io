@@ -89,3 +89,5 @@ input[type=search]::placeholder{color:var(--muted)}
 .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(124,92,255,.3)}
 .cform .btn{justify-self:start}
 @media(max-width:860px){.foot{grid-template-columns:1fr 1fr}.foot .fb{grid-column:1/-1}.trio{grid-template-columns:1fr}}
+nav ul a{white-space:nowrap}
+@media(max-width:560px){nav{padding:10px 16px}nav ul{gap:0}nav ul a{padding:6px 10px;font-size:.95rem}.logo{font-size:1.1rem}}
