@@ -1,0 +1,35 @@
+:root{--bg:#0a0620;--panel:rgba(255,255,255,.08);--line:rgba(255,255,255,.16);--ink:#f5f2ff;--muted:#b4abdc;--cyan:#29e3d0;--grad:linear-gradient(110deg,#ff4fa3,#7c5cff 55%,#29e3d0)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:var(--bg)}
+body{color:var(--ink);font:500 16px/1.4 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
+.app{position:fixed;inset:0;height:100vh;height:100dvh}
+#c{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.hud{position:absolute;left:0;right:0;top:0;display:flex;gap:10px;align-items:flex-start;padding:max(10px,env(safe-area-inset-top)) 12px 0;pointer-events:none}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:5px 12px;backdrop-filter:blur(8px);min-width:64px}
+.stat span{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.stat b{font-size:1.15rem;font-variant-numeric:tabular-nums}
+.stat.main b{font-size:1.5rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btns{margin-left:auto;display:flex;gap:8px;pointer-events:auto}
+.btns button{width:42px;height:42px;font-size:1.1rem;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;backdrop-filter:blur(8px)}
+.btns button:hover{background:rgba(255,255,255,.18)}
+.powers{position:absolute;left:12px;top:calc(max(10px,env(safe-area-inset-top)) + 70px);display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.pw{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px 3px 6px;backdrop-filter:blur(8px);font-weight:700;font-size:.85rem}
+.pw i{font-style:normal;font-size:1.1rem}.pw .bar{width:54px;height:6px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden}.pw .bar u{display:block;height:100%;background:var(--grad)}
+#toast{position:absolute;left:0;right:0;top:30%;text-align:center;font:800 clamp(1.6rem,6vw,2.6rem) system-ui,sans-serif;pointer-events:none;opacity:0;text-shadow:0 0 24px rgba(255,79,163,.95),0 3px 0 rgba(0,0,0,.5)}
+#toast.show{animation:pop 1s ease-out}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}15%{opacity:1;transform:scale(1.12)}30%{transform:scale(1)}75%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+.ov{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,6,32,.7);backdrop-filter:blur(6px);transition:opacity .25s}
+.ov.hide{opacity:0;pointer-events:none}
+.card{text-align:center;padding:22px;max-width:min(92%,420px)}
+.logo{font-size:3.2rem;filter:drop-shadow(0 0 18px rgba(255,79,163,.8))}
+.card h1{font-size:clamp(1.9rem,6vw,2.5rem);margin:4px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.card p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.rs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.rs div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
+.rs span{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}.rs b{font-size:1.25rem}
+.cta{font:700 1.1rem system-ui,sans-serif;color:#fff;background:var(--grad);border:0;border-radius:999px;padding:14px 38px;cursor:pointer;box-shadow:0 10px 30px -8px rgba(255,79,163,.8);transition:transform .15s}
+.cta:hover{transform:translateY(-2px)}
+.card .keys{margin:18px 0 0;font-size:.8rem;line-height:2}
+kbd{display:inline-block;min-width:24px;padding:0 7px;border-radius:6px;border:1px solid var(--line);border-bottom-width:3px;background:var(--panel);color:var(--ink);font:600 .75rem system-ui}
+@media (max-width:520px){.stat{min-width:0;padding:4px 9px}.stat b{font-size:1rem}.stat.main b{font-size:1.25rem}.btns button{width:38px;height:38px}}
+@media (prefers-reduced-motion:reduce){#toast.show{animation:none;opacity:1}}

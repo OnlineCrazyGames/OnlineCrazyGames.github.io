@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0a0620">
+<title>Skyline Sprint</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <canvas id="c" aria-label="Skyline Sprint game"></canvas>
+
+  <div class="hud" aria-live="off">
+    <div class="stat main"><span>Score</span><b id="score">0</b></div>
+    <div class="stat"><span>Credits</span><b id="coins">0</b></div>
+    <div class="stat"><span>Best</span><b id="best">0</b></div>
+    <div class="btns">
+      <button id="pbtn" type="button" aria-label="Pause">⏸</button>
+      <button id="mute" type="button" aria-label="Toggle sound">🔊</button>
+    </div>
+  </div>
+  <div class="powers" id="powers"></div>
+  <div id="toast" aria-live="polite"></div>
+
+  <div id="ov" class="ov">
+    <div class="card">
+      <div class="logo">🏃</div>
+      <h1 id="ovt">Skyline Sprint</h1>
+      <p id="ovm">Run the neon skyline. Dodge, jump and slide as far as you can!</p>
+      <div id="stats" class="rs"></div>
+      <button id="play" class="cta" type="button">▶ Play</button>
+      <p class="keys"><kbd>←</kbd><kbd>→</kbd> change lane · <kbd>↑</kbd>/<kbd>Space</kbd> jump · <kbd>↓</kbd> slide<br>On phones: swipe in any direction · <kbd>P</kbd> pause · <kbd>M</kbd> mute</p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
