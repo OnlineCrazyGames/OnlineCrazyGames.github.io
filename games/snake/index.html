@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post to Facebook Page</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#f5f7fa; color:#1a1a1a; margin:0; padding:20px; }
+  .container { max-width: 600px; margin: 0 auto; background:#fff; padding:24px; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); }
+  h1 { font-size:20px; margin-top:0; }
+  label { display:block; font-size:13px; font-weight:600; margin:14px 0 6px; color:#555; }
+  textarea, select, input[type="text"], input[type="url"] { width:100%; padding:10px; border:1px solid #d1d5db; border-radius:8px; font-size:15px; }
+  textarea { min-height:120px; resize:vertical; }
+  .row { display:flex; gap:10px; margin:14px 0 6px; }
+  .row > * { flex:1; }
+  button { margin-top:18px; width:100%; padding:12px; background:#1877f2; color:#fff; border:none; border-radius:8px; font-size:16px; font-weight:600; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:not-allowed; }
+  button:hover:not(:disabled) { background:#166fe5; }
+  button.secondary { background:#8a99a6; }
+  button.secondary:hover:not(:disabled) { background:#7a8894; }
+  #status { margin-top:16px; padding:12px; border-radius:8px; display:none; font-size:14px; }
+  #status.ok { background:#e7f7ec; color:#1e7a3a; border:1px solid #b9e4c9; display:block; }
+  #status.err { background:#fdecea; color:#b3261e; border:1px solid #f5c2c2; display:block; }
+  .note { font-size:13px; color:#666; line-height:1.5; margin-top:8px; }
+  code { background:#f1f1f1; padding:1px 6px; border-radius:4px; font-size:12px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Post to Facebook Page</h1>
+
+  <!-- Facebook Login section -->
+  <div id="loginSection">
+    <p>Log in with Facebook to publish to your page.</p>
+    <button id="fbLoginBtn" class="secondary">Login with Facebook</button>
+    <div id="loginStatus"></div>
+  </div>
+
+  <!-- Post form (hidden until logged in) -->
+  <div id="postSection" style="display:none">
+    <label for="pageSelect">Facebook Page</label>
+    <select id="pageSelect"></select>
+
+    <label for="message">Your post</label>
+    <textarea id="message" placeholder="What's on your mind?" required></textarea>
+
+    <div class="row">
+      <input id="link" type="url" placeholder="Link (optional)">
+      <input id="image" type="url" placeholder="Image URL (optional)">
+    </div>
+
+    <button id="publishBtn">Publish to Facebook</button>
+  </div>
+
+  <div id="status"></div>
+
+  <p class="note">
+    <strong>Setup required:</strong> Replace <code>YOUR_APP_ID</code> in the script with your own Facebook App ID from the Facebook Developer dashboard.<br>
+    The login asks for <code>pages_show_list</code>, <code>pages_manage_posts</code> and <code>publish_pages</code> permissions. For a live site, these permissions must be approved by Facebook (or use the app in Development mode with test accounts).
+  </p>
+</div>
+
+<!-- Facebook SDK Root -->
+<div id="fb-root"></div>
+
+<script>
+  // --------------------------------------------------------------------------
+  // REPLACE THIS with your own Facebook App ID
+  // --------------------------------------------------------------------------
+  const APP_ID = 'YOUR_APP_ID';
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : APP_ID,
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v19.0'
+    });
+
+    // Check if already logged in
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        handleLogin(response.authResponse);
+      }
+    });
+  };
+
+  // Load the Facebook SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // --------------------------------------------------------------------------
+  // Login
+  // --------------------------------------------------------------------------
+  document.getElementById('fbLoginBtn').addEventListener('click', function() {
+    FB.login(function(response) {
+      if (response.authResponse) {
+        handleLogin(response.authResponse);
+      } else {
+        show('Login cancelled or failed.', 'err');
+      }
+    }, {
+      scope: 'pages_show_list,pages_manage_posts,publish_pages,public_profile'
+    });
+  });
+
+  function handleLogin(authResponse) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('postSection').style.display = 'block';
+    show('Logged in. Loading your pages...', 'ok');
+
+    // Get the pages the user manages so we can pick one and get its access token
+    FB.api('/me/accounts', function(response) {
+      if (response.error || !response.data || response.data.length === 0) {
+        show('Could not load your Facebook pages: ' + (response.error ? response.error.message : 'none found'), 'err');
+        return;
+      }
+
+      const select = document.getElementById('pageSelect');
+      select.innerHTML = '<option value="">Select a page</option>';
+
+      response.data.forEach(function(page) {
+        // Store "pageId|pageAccessToken" as the option value
+        var opt = document.createElement('option');
+        opt.value = page.id + '|' + (page.access_token || '');
+        opt.textContent = page.name;
+        select.appendChild(opt);
+      });
+
+      show('Logged in. Select your page and write a post.', 'ok');
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Publish
+  // --------------------------------------------------------------------------
+  document.getElementById('publishBtn').addEventListener('click', function() {
+    var select = document.getElementById('pageSelect');
+    var parts = select.value.split('|');
+    var pageId = parts[0];
+    var pageToken = parts[1];
+
+    var message = document.getElementById('message').value.trim();
+    var link = document.getElementById('link').value.trim();
+    var image = document.getElementById('image').value.trim();
+
+    if (!pageId || !pageToken) {
+      show('Please select a Facebook page.', 'err');
+      return;
+    }
+    if (!message) {
+      show('Please write a post.', 'err');
+      return;
+    }
+
+    var btn = document.getElementById('publishBtn');
+    btn.disabled = true;
+    btn.textContent = 'Publishing...';
+    show('', '');
+
+    var params = {
+      message: message,
+      access_token: pageToken
+    };
+    if (link) params.link = link;
+    if (image) params.picture = image;
+
+    FB.api('/' + pageId + '/feed', 'POST', params, function(response) {
+      btn.disabled = false;
+      btn.textContent = 'Publish to Facebook';
+
+      if (response.error) {
+        show('Error: ' + response.error.message, 'err');
+      } else if (response.id) {
+        show('Posted successfully! Post ID: ' + response.id, 'ok');
+        document.getElementById('message').value = '';
+        document.getElementById('link').value = '';
+        document.getElementById('image').value = '';
+      } else {
+        show('Unknown response from Facebook.', 'err');
+      }
+    });
+  });
+
+  function show(text, kind) {
+    var el = document.getElementById('status');
+    el.textContent = text;
+    el.className = kind || '';
+    el.style.display = text ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>
