@@ -1,5 +1,7 @@
 /* Games are discovered automatically from the games/ folder of this repo. */
 const OWNER='OnlineCrazyGames',REPO='OnlineCrazyGames.github.io';
+const EMAIL='hello@example.com'; // <-- put your real contact email here
+
 const $=s=>document.querySelector(s);
 const COL=['#ffb3d1','#a8f0c6','#ffe7a0','#c9bbff','#9fe9f2','#ffd59a','#ffc9e3','#b6f0a8'],EM=['🎮','🕹️','👾','🚀','🎲','🧩','🏁','⭐'];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -31,8 +33,9 @@ const card=g=>`<a class="card" href="play.html?g=${encodeURIComponent(g.id)}"><d
 const none='<p class="empty">No games found yet. Add a folder inside <b>games/</b> with an <b>index.html</b> and it will appear here.</p>';
 const page=document.body.dataset.page;
 const nav=(p,l,h)=>`<li><a href="${h}"${page===p?' aria-current="page"':''}>${l}</a></li>`;
-$('#top').innerHTML=`<nav class="wrap" aria-label="Main"><a class="logo" href="index.html"><span>🎮</span> Online Crazy Games</a><ul>${nav('home','Home','index.html')}${nav('games','All games','games.html')}<li><a href="https://github.com/${OWNER}/${REPO}">GitHub</a></li></ul></nav>`;
-$('#foot').innerHTML=`<footer class="wrap"><span>© ${new Date().getFullYear()} Online Crazy Games</span><span>Free to play, always. <a href="games.html">Browse all games</a></span></footer>`;
+$('#top').innerHTML=`<nav class="wrap" aria-label="Main"><a class="logo" href="index.html"><span>🎮</span> Online Crazy Games</a><ul>${nav('home','Home','index.html')}${nav('games','All games','games.html')}${nav('about','About','about.html')}${nav('contact','Contact','contact.html')}</ul></nav>`;
+$('#foot').innerHTML=`<footer class="wrap foot"><div class="fb"><a class="logo" href="index.html"><span>🎮</span> Online Crazy Games</a><p>Free, instant browser games for everyone. No downloads, no sign-ups.</p></div><div><h4>Explore</h4><a href="index.html">Home</a><a href="games.html">All games</a></div><div><h4>Company</h4><a href="about.html">About us</a><a href="contact.html">Contact</a></div><div><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div><p class="copy">© ${new Date().getFullYear()} Online Crazy Games. All rights reserved.</p></footer>`;
+if(page==='contact'){$('#mail').textContent=EMAIL;$('#mail').href='mailto:'+EMAIL;$('#cf').onsubmit=e=>{e.preventDefault();const f=e.target;location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('Message from '+f.n.value)+'&body='+encodeURIComponent(f.m.value)+'%0A%0A'+encodeURIComponent(f.n.value+' ('+f.e.value+')')}}
 loadGames().then(G=>{
  const cats=[...new Set(G.map(g=>g.cat))];
  if(page==='home'){
