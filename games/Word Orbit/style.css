@@ -10,7 +10,7 @@
 #game{width:100%;height:100%;display:block;touch-action:none} .side{display:flex;flex-direction:column;gap:12px}
 .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:12px;backdrop-filter:blur(10px)}
 .card h3{margin:0 0 8px;font-size:13px;color:#b4abdc} .letters{display:flex;gap:6px;flex-wrap:wrap} .letters span{background:linear-gradient(110deg,#ff4fa3,#7c5cff);border-radius:8px;padding:6px 8px;font-weight:700}
-.current{font-size:22px;font-weight:800;letter-spacing:2px;min-height:28px} .found{max-height:160px;overflow:auto;display:flex;flex-wrap:wrap;gap:6px} .found span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 8px;font-size:12px}
+.current{font-size:24px;font-weight:800;letter-spacing:2px;min-height:30px} .found{max-height:160px;overflow:auto;display:flex;flex-wrap:wrap;gap:6px} .found span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 8px;font-size:12px}
 .primary{background:linear-gradient(110deg,#ff4fa3,#7c5cff 55%,#29e3d0);color:white;border:none;border-radius:999px;padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(124,92,255,.35)}
 .primary.large{padding:14px 26px;font-size:18px} .ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:999px;padding:8px 14px;cursor:pointer;margin-top:6px;width:100%}
 .icon{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:8px 10px;cursor:pointer}
