@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Aether Guard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <section class="panel stats">
+    <div class="box"><span class="lbl">Score</span><b id="score" class="grad">0</b></div>
+    <div class="box"><span class="lbl">Best</span><b id="best">0</b></div>
+    <div class="box"><span class="lbl">Wave</span><b id="level">0</b></div>
+  </section>
+  <section class="panel side">
+    <div class="box"><span class="lbl">Core · Gold</span><b id="lives">❤10</b></div>
+    <button class="icon" id="pauseBtn" aria-label="Pause">⏸</button>
+    <button class="icon" id="muteBtn" aria-label="Mute sound">🔊</button>
+  </section>
+  <main class="stage">
+    <div class="wrap" id="wrap"><canvas id="cv" aria-label="Tower defense board"></canvas></div>
+    <div class="touch">
+      <button id="t0" aria-label="Bolt tower">⚡ Bolt<br>50</button>
+      <button id="t1" aria-label="Frost tower">❄ Frost<br>70</button>
+      <button id="t2" aria-label="Cannon tower">💥 Cannon<br>100</button>
+      <button id="sell" aria-label="Sell selected tower">Sell</button>
+      <button id="go" class="drop" aria-label="Start next wave">▶ Wave</button>
+    </div>
+  </main>
+  <div id="ov" class="ov">
+    <div class="card">
+      <h1 id="ovT" class="grad">Aether Guard</h1>
+      <p id="ovS">Build towers along the path and protect the core from endless waves.</p>
+      <div class="sc"><span>Score <b id="ovSc">0</b></span><span>Best <b id="ovB">0</b></span></div>
+      <button class="play" id="playBtn">Play</button>
+      <p class="hint"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> tower · click/<kbd>Enter</kbd> place or upgrade · <kbd>S</kbd> sell · <kbd>N</kbd> next wave · <kbd>P</kbd> pause · <kbd>M</kbd> mute</p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
