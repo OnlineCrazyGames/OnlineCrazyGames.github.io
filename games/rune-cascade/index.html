@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Rune Cascade</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <section class="panel stats">
+    <div class="box"><span class="lbl">Score</span><b id="score" class="grad">0</b></div>
+    <div class="box"><span class="lbl">Best</span><b id="best">0</b></div>
+    <div class="box"><span class="lbl">Level</span><b id="level">1</b></div>
+  </section>
+  <section class="panel side">
+    <div class="box"><span class="lbl">Moves</span><b id="lives">20</b></div>
+    <button class="icon" id="pauseBtn" aria-label="Pause">⏸</button>
+    <button class="icon" id="muteBtn" aria-label="Mute sound">🔊</button>
+  </section>
+  <main class="stage"><div class="wrap" id="wrap"><canvas id="cv" aria-label="Rune board"></canvas></div></main>
+  <div id="ov" class="ov">
+    <div class="card">
+      <h1 id="ovT" class="grad">Rune Cascade</h1>
+      <p id="ovS">Swap neighbouring runes to match 3 or more. Reach each level's goal before your moves run out!</p>
+      <div class="sc"><span>Score <b id="ovSc">0</b></span><span>Best <b id="ovB">0</b></span></div>
+      <button class="play" id="playBtn">Play</button>
+      <p class="hint"><kbd>←↑↓→</kbd> move · <kbd>Space</kbd> select, then arrow to swap · mouse/touch: tap or drag · <kbd>P</kbd> pause · <kbd>M</kbd> mute</p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
