@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Neon Snake</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Neon Viper 3D</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="wrap">
-  <canvas id="game" width="400" height="400"></canvas>
-  <div class="hud">
-    <div class="hud-item"><span class="label">SCORE</span><span id="score" class="value">0</span></div>
-    <div class="hud-item"><span class="label">BEST</span><span id="best" class="value">0</span></div>
-    <div class="hud-item"><span class="label">LEVEL</span><span id="level" class="value">1</span></div>
-  </div>
-  <div id="startPanel" class="panel show">
-    <div class="logo">SNAKE</div>
-    <p>Arrow keys or swipe to move</p>
-    <button class="btn" id="startBtn">Start Game</button>
-  </div>
-  <div id="pausePanel" class="panel">
-    <div class="logo">Paused</div>
-    <button class="btn" id="resumeBtn">Resume</button>
-  </div>
-  <div id="overPanel" class="panel">
-    <div class="logo">Game Over</div>
-    <p id="finalScore">Score 0</p>
-    <p id="newBest" class="best-msg">New Best!</p>
-    <button class="btn" id="restartBtn">Play Again</button>
-  </div>
-</div>
-
-<div class="controls">
-  <button class="d" id="btnUp">&#9650;</button>
-  <div class="d-row">
-    <button class="d" id="btnLeft">&#9664;</button>
-    <button class="d" id="btnDown">&#9660;</button>
-    <button class="d" id="btnRight">&#9665;</button>
+<div class="app">
+  <section class="panel stats">
+    <div class="box"><span class="lbl">Score</span><b id="score" class="grad">0</b></div>
+    <div class="box"><span class="lbl">Best</span><b id="best">0</b></div>
+    <div class="box"><span class="lbl">Level</span><b id="level">1</b></div>
+  </section>
+  <section class="panel side">
+    <div class="box"><span class="lbl">Length</span><b id="lives">3</b></div>
+    <button class="icon" id="pauseBtn" aria-label="Pause">⏸</button>
+    <button class="icon" id="muteBtn" aria-label="Mute sound">🔊</button>
+  </section>
+  <main class="stage">
+    <div class="wrap" id="wrap"><canvas id="cv" aria-label="3D snake board"></canvas></div>
+    <div class="touch">
+      <button id="bl" aria-label="Turn left">◀</button>
+      <button id="bu" aria-label="Turn up">▲</button>
+      <button id="bdn" aria-label="Turn down">▼</button>
+      <button id="br" aria-label="Turn right">▶</button>
+    </div>
+  </main>
+  <div id="ov" class="ov">
+    <div class="card">
+      <h1 id="ovT" class="grad">Neon Viper 3D</h1>
+      <p id="ovS">Glide through the neon arena, eat gems and avoid crystals, walls and your own tail.</p>
+      <div class="sc"><span>Score <b id="ovSc">0</b></span><span>Best <b id="ovB">0</b></span></div>
+      <button class="play" id="playBtn">Play</button>
+      <p class="hint"><kbd>←↑↓→</kbd> / <kbd>WASD</kbd> steer · swipe on touch · <kbd>P</kbd> pause · <kbd>M</kbd> mute</p>
+    </div>
   </div>
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>
